@@ -14,7 +14,7 @@ const Movie = ({ info, removeMovie }) => {
     border: "1px solid #605c5c",
     padding: "10px 15px",
     borderRadius: "5px",
-    background: "#539F91",
+    background: "#92ab7c",
     marginBottom: "10px",
   };
 
@@ -22,12 +22,14 @@ const Movie = ({ info, removeMovie }) => {
     display: "flex",
     justifyContent: "space-between",
     borderBottom: "solid 1px #43476f",
+    flexWrap: "wrap"
   };
 
   useEffect(() => {
     let g = info.genre.replace(/\|/g, "</span><span>");
     genreRef.current.innerHTML = `<span>${g}</span>`;
-  }, []);
+    console.log("info.genre changed");
+  }, [info.genre]);
 
   return (
     <div style={styles}>
