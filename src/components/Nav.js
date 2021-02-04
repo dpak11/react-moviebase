@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   const style = {
     height: "10vh",
-    backgroundColor: "#123D35",
+    backgroundColor: "rgb(69 189 168)",
     fontSize:"1.5em",
     padding: "10px",
     display: "flex",

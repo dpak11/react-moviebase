@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
 
+
 const Movie = ({ info, removeMovie }) => {
   const genreRef = useRef();
 
@@ -14,7 +15,7 @@ const Movie = ({ info, removeMovie }) => {
     border: "1px solid #605c5c",
     padding: "10px 15px",
     borderRadius: "5px",
-    background: "#92ab7c",
+    background: "rgb(185 188 183)",
     marginBottom: "10px",
   };
 
@@ -24,10 +25,10 @@ const Movie = ({ info, removeMovie }) => {
     borderBottom: "solid 1px #43476f",
     flexWrap: "wrap"
   };
-
+  
   useEffect(() => {
-    let g = info.genre.replace(/\|/g, "</span><span>");
-    genreRef.current.innerHTML = `<span>${g}</span>`;
+    let g = info.genre.replace(/\|/g, '</span><span class="tags">');
+    genreRef.current.innerHTML = `<span class="tags">${g}</span>`;
     console.log("info.genre changed");
   }, [info.genre]);
 
@@ -46,7 +47,7 @@ const Movie = ({ info, removeMovie }) => {
       <p>{info.runtime}</p>
 
       <p>{info.country}</p>
-      <p>{info.rating}%</p>
+      <p>{parseInt(info.rating)}%</p>
       <p>
         <button data-id={info.id} onClick={deleteMovie}>
           Delete
