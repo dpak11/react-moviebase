@@ -68,8 +68,8 @@ const Gallery = () => {
   console.log("rendering gallery, useRef:", movieRef.current);
   return (
     <div style={galleryStyle}>
-      <h1 style={{"color": "rgb(119, 216, 199)"}}>Movie Gallery</h1>
-      <p>
+      <h1 style={{"color": "rgb(119, 216, 199)","textAlign":"center"}}>Movie Gallery</h1>
+      <p style={{"textAlign":"center"}}>
         <input
           style={searchStyle}
           type="text"
