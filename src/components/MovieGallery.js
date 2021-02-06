@@ -27,6 +27,18 @@ const Gallery = () => {
     width: "30%",
     minWidth: "100px",
   };
+  const genreStyle = {
+    border: "1px solid grey",
+    padding: "3px 5px",
+    borderRadius: "7px",
+    marginRight: "5px",
+    backgroundColor: "rgba(255, 255, 0, 0.5)",
+    color:"#fff"
+  };
+  const genreListing = {
+    display:"flex",
+    flexWrap: "wrap"
+  };
 
   const movieSearch = (e) => {
     setMoviename(e.target.value);
@@ -66,10 +78,16 @@ const Gallery = () => {
   }, []);
 
   console.log("rendering gallery, useRef:", movieRef.current);
+  let allGenres = movieRef.current ? movieRef.current.map((m) => m.genre.split("|")) : [];
+  allGenres = [].concat.apply([],allGenres);
+  allGenres = [...new Set(allGenres)];
+  console.log(allGenres);
   return (
     <div style={galleryStyle}>
-      <h1 style={{"color": "rgb(119, 216, 199)","textAlign":"center"}}>Movie Gallery</h1>
-      <p style={{"textAlign":"center"}}>
+      <h1 style={{ color: "rgb(119, 216, 199)", textAlign: "center" }}>
+        Movie Gallery
+      </h1>
+      <p style={{ textAlign: "center" }}>
         <input
           style={searchStyle}
           type="text"
@@ -77,6 +95,10 @@ const Gallery = () => {
           onChange={movieSearch}
           placeholder="Type movie name..."
         />
+      </p>
+      <p style={genreListing}>
+        {allGenres &&
+          allGenres.map((genre, i) => <span style={genreStyle}>{genre}</span>)}
       </p>
       <hr />
       <div style={tileStyle}>
