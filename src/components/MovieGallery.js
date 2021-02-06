@@ -5,7 +5,6 @@ import Movie from "./Movie";
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
   const { movies, setMovies, movieRef } = useContext(MovieContext);
-  //const movieRef = useRef(null);
 
   const galleryStyle = {
     minHeight: "80vh",
@@ -32,12 +31,14 @@ const Gallery = () => {
     padding: "3px 5px",
     borderRadius: "7px",
     marginRight: "5px",
-    backgroundColor: "rgba(255, 255, 0, 0.5)",
-    color:"#fff"
+    marginBottom: "5px",
+    backgroundColor: "rgb(64, 143, 129)",
+    color: "#fff",
   };
   const genreListing = {
-    display:"flex",
-    flexWrap: "wrap"
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent:"center"
   };
 
   const movieSearch = (e) => {
@@ -78,10 +79,12 @@ const Gallery = () => {
   }, []);
 
   console.log("rendering gallery, useRef:", movieRef.current);
-  let allGenres = movieRef.current ? movieRef.current.map((m) => m.genre.split("|")) : [];
-  allGenres = [].concat.apply([],allGenres);
-  allGenres = [...new Set(allGenres)];
-  console.log(allGenres);
+  let allGenres = movieRef.current
+    ? movieRef.current.map((m) => m.genre.split("|"))
+    : [];
+  allGenres = [].concat.apply([], allGenres);
+  allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
+ 
   return (
     <div style={galleryStyle}>
       <h1 style={{ color: "rgb(119, 216, 199)", textAlign: "center" }}>

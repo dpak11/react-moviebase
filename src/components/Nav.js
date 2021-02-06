@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   const style = {
     height: "10vh",
-    backgroundColor: "rgb(69 189 168)",
+    backgroundColor: "rgb(95, 214, 193)",
     fontSize:"1.5em",
     padding: "10px",
     display: "flex",
     alignItems:"center",
-    justifyContent:"space-around"
+    justifyContent:"space-around",
+    borderBottom:"solid 3px #23544c"
   };
   console.log("Head rendered");
   return (
