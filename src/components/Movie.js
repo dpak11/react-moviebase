@@ -49,7 +49,7 @@ const Movie = ({ info, removeMovie }) => {
       <p>{info.country}</p>
       <p>{parseInt(info.rating)}%</p>
       <p>
-        <button data-id={info.id} onClick={deleteMovie}>
+        <button className="deleteBtn" data-id={info.id} onClick={deleteMovie}>
           Delete
         </button>
       </p>
