@@ -34,12 +34,12 @@ const Gallery = () => {
     marginBottom: "5px",
     backgroundColor: "rgb(64, 143, 129)",
     color: "#fff",
-    cursor:"pointer"
+    cursor: "pointer",
   };
   const genreListing = {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent:"center"
+    justifyContent: "center",
   };
 
   const movieSearch = (e) => {
@@ -79,9 +79,13 @@ const Gallery = () => {
     }
   }, []);
 
-  const selectGenre = (genre) => {
-    console.log(genre)
-  }
+  const selectGenre = (genre, target) => {
+    console.log(genre);
+    target.classList.toggle("tag-selected");
+    setMovies(() => {
+      return movieRef.current.filter((m) => m.genre.indexOf(genre) !== -1);
+    });
+  };
 
   console.log("rendering gallery, useRef:", movieRef.current);
   let allGenres = movieRef.current
@@ -90,7 +94,6 @@ const Gallery = () => {
   allGenres = [].concat.apply([], allGenres);
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
 
- 
   return (
     <div style={galleryStyle}>
       <h1 style={{ color: "rgb(119, 216, 199)", textAlign: "center" }}>
@@ -107,7 +110,15 @@ const Gallery = () => {
       </p>
       <p style={genreListing}>
         {allGenres &&
-          allGenres.map((genre, i) => <span key={i} onClick={() => selectGenre(genre)} style={genreStyle}>{genre}</span>)}
+          allGenres.map((genre, i) => (
+            <span
+              key={i}
+              onClick={(e) => selectGenre(genre, e.target)}
+              style={genreStyle}
+            >
+              {genre}
+            </span>
+          ))}
       </p>
       <hr />
       <div style={tileStyle}>
