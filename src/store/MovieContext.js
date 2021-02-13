@@ -26,9 +26,10 @@ export const MovieContext = createContext();
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const movieRef = useRef(null);
+  const tagsRef = useRef([]);
   //const [cachedMovies, setCached] = useState(null);
   return (
-    <MovieContext.Provider value={{ movies, setMovies, movieRef }}>
+    <MovieContext.Provider value={{ movies, setMovies, movieRef,tagsRef }}>
       {children}
     </MovieContext.Provider>
   );

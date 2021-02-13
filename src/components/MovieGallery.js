@@ -4,7 +4,7 @@ import Movie from "./Movie";
 
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
-  const { movies, setMovies, movieRef } = useContext(MovieContext);
+  const { movies, setMovies, movieRef, tagsRef } = useContext(MovieContext);
 
   const galleryStyle = {
     minHeight: "80vh",
@@ -45,10 +45,38 @@ const Gallery = () => {
   const movieSearch = (e) => {
     setMoviename(e.target.value);
   };
+
+  const nameSearch = () => {
+    if (moviename === "") return movieRef.current;
+    return movieRef.current.filter((m) =>
+      m.name.toLowerCase().includes(moviename.toLowerCase())
+    );
+  };
+
   const removeMovie = (id) => {
     movieRef.current = movieRef.current.filter((m) => m.id !== id);
     setMovies([...movieRef.current]);
   };
+
+  const selectGenre = (genre, target) => {
+    const tagIndex = tagsRef.current.indexOf(genre);
+    if (tagIndex >= 0) {
+      tagsRef.current.splice(tagIndex, 1);
+    } else {
+      tagsRef.current.push(genre);
+    }
+    target.classList.toggle("tag-selected");
+    setMovies(getTaggedMovieList(movieRef.current));
+  };
+
+  const getTaggedMovieList = (movList) => {
+    return movList.filter((m) =>
+      tagsRef.current.every((tag) => m.genre.indexOf(tag) >= 0)
+    );
+  }
+
+  
+
   const fetchData = async () => {
     console.log("fetching data...");
     const data = await fetch(
@@ -61,12 +89,8 @@ const Gallery = () => {
 
   useEffect(() => {
     console.log("useEffect, movie name changed");
-    setMovies(() => {
-      if (moviename === "") return movieRef.current;
-      return movieRef.current.filter((m) =>
-        m.name.toLowerCase().includes(moviename.toLowerCase())
-      );
-    });
+    const mlist = nameSearch();
+    setMovies(getTaggedMovieList(mlist || []));
   }, [moviename]);
 
   useEffect(() => {
@@ -78,14 +102,6 @@ const Gallery = () => {
       setMovies(movieRef.current);
     }
   }, []);
-
-  const selectGenre = (genre, target) => {
-    console.log(genre);
-    target.classList.toggle("tag-selected");
-    setMovies(() => {
-      return movieRef.current.filter((m) => m.genre.indexOf(genre) !== -1);
-    });
-  };
 
   console.log("rendering gallery, useRef:", movieRef.current);
   let allGenres = movieRef.current
