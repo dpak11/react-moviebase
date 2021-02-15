@@ -2,45 +2,45 @@ import { MovieContext } from "../store/MovieContext";
 import { useContext, useState, useEffect } from "react";
 import Movie from "./Movie";
 
+const galleryStyle = {
+  minHeight: "80vh",
+  backgroundColor: "#2D7064",
+  fontSize: ".9em",
+  padding: "20px",
+};
+const tileStyle = {
+  backgroundColor: "#255E54",
+  padding: "10px",
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+};
+
+const searchStyle = {
+  padding: "10px",
+  borderRadius: "5px",
+  width: "30%",
+  minWidth: "100px",
+};
+const genreStyle = {
+  border: "1px solid grey",
+  padding: "3px 5px",
+  borderRadius: "7px",
+  marginRight: "5px",
+  marginBottom: "5px",
+  backgroundColor: "rgb(64, 143, 129)",
+  color: "#fff",
+  cursor: "pointer",
+};
+const genreListing = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+};
+
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
   const { movies, setMovies, movieRef, tagsRef } = useContext(MovieContext);
-
-  const galleryStyle = {
-    minHeight: "80vh",
-    backgroundColor: "#2D7064",
-    fontSize: ".9em",
-    padding: "20px",
-  };
-  const tileStyle = {
-    backgroundColor: "#255E54",
-    padding: "10px",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  };
-
-  const searchStyle = {
-    padding: "10px",
-    borderRadius: "5px",
-    width: "30%",
-    minWidth: "100px",
-  };
-  const genreStyle = {
-    border: "1px solid grey",
-    padding: "3px 5px",
-    borderRadius: "7px",
-    marginRight: "5px",
-    marginBottom: "5px",
-    backgroundColor: "rgb(64, 143, 129)",
-    color: "#fff",
-    cursor: "pointer",
-  };
-  const genreListing = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  };
 
   const movieSearch = (e) => {
     setMoviename(e.target.value);
@@ -73,9 +73,7 @@ const Gallery = () => {
     return movList.filter((m) =>
       tagsRef.current.every((tag) => m.genre.indexOf(tag) >= 0)
     );
-  }
-
-  
+  };
 
   const fetchData = async () => {
     console.log("fetching data...");

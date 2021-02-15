@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
-import { useRef, useEffect } from "react";
-
 
 const Movie = ({ info, removeMovie }) => {
-  const genreRef = useRef();
-
   const deleteMovie = (e) => {
     const id = e.target.getAttribute("data-id");
     removeMovie(Number(id));
   };
+  
   console.log("rendering Movie Item");
   const styles = {
     width: "250px",
@@ -23,14 +20,10 @@ const Movie = ({ info, removeMovie }) => {
     display: "flex",
     justifyContent: "space-between",
     borderBottom: "solid 1px #43476f",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   };
-  
-  useEffect(() => {
-    let g = info.genre.replace(/\|/g, '</span><span class="tags">');
-    genreRef.current.innerHTML = `<span class="tags">${g}</span>`;
-    console.log("info.genre changed");
-  }, [info.genre]);
+
+  const genres = info.genre.split("|");
 
   return (
     <div style={styles}>
@@ -42,7 +35,11 @@ const Movie = ({ info, removeMovie }) => {
           {info.name}
         </Link>
       </h3>
-      <p ref={genreRef} style={genreStyle}></p>
+      <p style={genreStyle}>
+        {genres.map((genre,i) => (
+          <span key={i} className="tags">{genre}</span>
+        ))}
+      </p>
 
       <p>{info.runtime}</p>
 

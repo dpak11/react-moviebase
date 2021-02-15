@@ -11,6 +11,7 @@ const MovieDetail = ({ match }) => {
     alignItems: "center",
     justifyContent: "center",
   };
+  const genres = movie.genre.split("|");
   return (
     <div style={myStyle}>
       <div>
@@ -18,7 +19,11 @@ const MovieDetail = ({ match }) => {
         <p>{movie.name}</p>
         <p>{movie.runtime}</p>
         <p>{movie.release}</p>
-        <p>{movie.genre}</p>
+        <p>
+          {genres.map((genre,i) => (
+            <span key={i} className="tags">{genre}</span>
+          ))}
+        </p>
         <p>{movie.country}</p>
         <p>{movie.rating}%</p>
         <Link to="/gallery">Go Back</Link>
