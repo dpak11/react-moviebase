@@ -138,7 +138,7 @@ const Gallery = () => {
       <div style={tileStyle}>
         {movies
           ? movies.map((mov, i) => (
-              <Movie key={i} info={mov} removeMovie={removeMovie} />
+              <Movie key={i} movInfo={mov} removeMovie={removeMovie} />
             ))
           : "Loading..."}
       </div>
