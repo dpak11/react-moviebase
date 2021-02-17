@@ -55,7 +55,8 @@ const Gallery = () => {
 
   const removeMovie = (id) => {
     movieRef.current = movieRef.current.filter((m) => m.id !== id);
-    setMovies([...movieRef.current]);
+    const mlist = nameSearch();
+    setMovies(getTaggedMovieList(mlist || []));
   };
 
   const selectGenre = (genre, target) => {
@@ -136,7 +137,7 @@ const Gallery = () => {
       </p>
       <hr />
       <div style={tileStyle}>
-        {movies
+        {movies.length
           ? movies.map((mov, i) => (
               <Movie key={i} movInfo={mov} removeMovie={removeMovie} />
             ))
