@@ -94,6 +94,7 @@ const Gallery = () => {
 
   useEffect(() => {
     console.log("gallery mounted", movieRef.current);
+    tagsRef.current = [];
     if (!movieRef.current) {
       fetchData();
     } else {
@@ -103,11 +104,13 @@ const Gallery = () => {
   }, []);
 
   console.log("rendering gallery, useRef:", movieRef.current);
+  
   let allGenres = movieRef.current
     ? movieRef.current.map((m) => m.genre.split("|"))
     : [];
   allGenres = [].concat.apply([], allGenres);
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
+  allGenres.sort();
 
   return (
     <div style={galleryStyle}>
