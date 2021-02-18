@@ -29,14 +29,18 @@ footer {
   border-radius: 7px;
   margin-bottom: 10px;
 }
-span.tag-selected{
+span.tag-selected {
   background-color: yellow !important;
-  color:#000 !important
+  color: #000 !important;
 }
-.deleteBtn{
+.deleteBtn {
   padding: 6px 12px;
   border-radius: 7px;
   background: #dd1f1f;
   color: #fff;
   border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8em;
 }

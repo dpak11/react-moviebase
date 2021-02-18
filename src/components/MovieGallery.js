@@ -103,8 +103,8 @@ const Gallery = () => {
     }
   }, []);
 
-  console.log("rendering gallery, useRef:", movieRef.current);
   
+  console.log("rendering gallery, useRef:", movieRef.current);
   let allGenres = movieRef.current
     ? movieRef.current.map((m) => m.genre.split("|"))
     : [];
@@ -115,7 +115,7 @@ const Gallery = () => {
   return (
     <div style={galleryStyle}>
       <h1 style={{ color: "rgb(119, 216, 199)", textAlign: "center" }}>
-        Movie Gallery
+        Movie Gallery ({movies.length})
       </h1>
       <p style={{ textAlign: "center" }}>
         <input
@@ -139,12 +139,17 @@ const Gallery = () => {
           ))}
       </p>
       <hr />
+      
       <div style={tileStyle}>
-        {movies.length
-          ? movies.map((mov, i) => (
-              <Movie key={i} movInfo={mov} removeMovie={removeMovie} />
-            ))
-          : "Loading..."}
+        {movies.length ? (
+          movies.map((mov, i) => (
+            <Movie key={i} movInfo={mov} removeMovie={removeMovie} />
+          ))
+        ) : (
+          <span style={{ display: !movieRef.current ? "block" : "none" }}>
+            Loading...
+          </span>
+        )}
       </div>
     </div>
   );

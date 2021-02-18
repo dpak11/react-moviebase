@@ -15,8 +15,8 @@ const MovieDetail = ({ match }) => {
   return (
     <div style={myStyle}>
       <div>
-        <h1>Movie Details:</h1>
-        <p>{movie.name}</p>
+        <h4 style={{color:"grey"}}>MOVIE DETAILS:</h4>
+        <h1>{movie.name}</h1>
         <p>{movie.runtime}</p>
         <p>{movie.release}</p>
         <p>

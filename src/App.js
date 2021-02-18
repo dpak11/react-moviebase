@@ -18,8 +18,8 @@ function App4() {
   return (
     <Router>
       <div className="container">
-        <MovieProvider>
-          <Nav />
+      <Nav />
+        <MovieProvider>         
           <div>
             <Switch>
               <Route path="/" exact component={Home} />
