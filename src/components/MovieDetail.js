@@ -16,17 +16,17 @@ const MovieDetail = ({ match }) => {
     <div style={myStyle}>
       <div>
         <h4 style={{color:"grey"}}>MOVIE DETAILS:</h4>
-        <h1>{movie.name}</h1>
-        <p>{movie.runtime}</p>
-        <p>{movie.release}</p>
+        <h1>{movie.name}</h1>        
         <p>
           {genres.map((genre,i) => (
-            <span key={i} className="tags">{genre}</span>
+            <span key={i} className="tags" style={{marginRight:"10px"}}>Genre: {genre}</span>
           ))}
         </p>
-        <p>{movie.country}</p>
-        <p>{movie.rating}%</p>
-        <Link to="/gallery">Go Back</Link>
+        <p>Run Time: {movie.runtime}</p>
+        <p>Release Date: {movie.release}</p>
+        <p>Country: {movie.country}</p>
+        <p>Rating: {movie.rating}%</p>
+        <Link to="/gallery">&lt; Go Back</Link>
       </div>
     </div>
   );

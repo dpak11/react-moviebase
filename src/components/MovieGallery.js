@@ -19,8 +19,8 @@ const tileStyle = {
 const searchStyle = {
   padding: "10px",
   borderRadius: "5px",
-  width: "30%",
-  minWidth: "100px",
+  width: "20%",
+  minWidth: "160px",
 };
 const genreStyle = {
   border: "1px solid grey",
