@@ -44,3 +44,14 @@ span.tag-selected {
   letter-spacing: 1px;
   font-size: 0.8em;
 }
+
+.rate-pale{
+  color:rgb(179, 170, 170)
+}
+.rate-grey{
+  color: rgb(100, 95, 95);
+}
+.rate-red{
+  color: red;
+}
+
