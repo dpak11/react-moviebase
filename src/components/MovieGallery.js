@@ -40,7 +40,9 @@ const genreListing = {
 
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
-  const { movies, setMovies, movieRef, tagsRef } = useContext(MovieContext);
+  const { movies, setMovies, movieRef, tagsRef, visitedRef } = useContext(
+    MovieContext
+  );
 
   const movieSearch = (e) => {
     setMoviename(e.target.value);
@@ -103,7 +105,6 @@ const Gallery = () => {
     }
   }, []);
 
-  
   console.log("rendering gallery, useRef:", movieRef.current);
   let allGenres = movieRef.current
     ? movieRef.current.map((m) => m.genre.split("|"))
@@ -111,6 +112,12 @@ const Gallery = () => {
   allGenres = [].concat.apply([], allGenres);
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
   allGenres.sort();
+
+  const visitedPage = sessionStorage.getItem("page");
+  if (visitedPage) {
+    visitedRef.current.push(visitedPage);
+    sessionStorage.removeItem("page")
+  }
 
   return (
     <div style={galleryStyle}>
@@ -138,8 +145,15 @@ const Gallery = () => {
             </span>
           ))}
       </p>
+      <p>
+        {visitedRef.current.map((page, i) => (
+          <span>
+            {page} |&nbsp;
+          </span>
+        ))}
+      </p>
       <hr />
-      
+
       <div style={tileStyle}>
         {movies.length ? (
           movies.map((mov, i) => (

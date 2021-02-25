@@ -6,8 +6,9 @@ export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const movieRef = useRef(null);
   const tagsRef = useRef([]);
+  const visitedRef = useRef([]);
   return (
-    <MovieContext.Provider value={{ movies, setMovies, movieRef, tagsRef }}>
+    <MovieContext.Provider value={{ movies, setMovies, movieRef, tagsRef, visitedRef }}>
       {children}
     </MovieContext.Provider>
   );

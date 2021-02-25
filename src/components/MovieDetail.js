@@ -2,19 +2,22 @@ import { Link } from "react-router-dom";
 import { MovieContext } from "../store/MovieContext";
 import { useContext } from "react";
 
+const myStyle = {
+  height: "70vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+const ratingText = {
+  fontSize:"2.4em",
+  fontWeight:"bold"
+};
+
 const MovieDetail = ({ match }) => {
   const { movies } = useContext(MovieContext);
   const movie = movies.find((m) => m.id === Number(match.params.id));
-  const myStyle = {
-    height: "70vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-  const ratingText = {
-    fontSize:"2.4em",
-    fontWeight:"bold"
-  };
+ 
+  sessionStorage.setItem("page", movie.name);
   const genres = movie.genre.split("|");
   let colorRate = Number(movie.rating) > 50 ? "rate-grey" : "rate-pale";
   colorRate = Number(movie.rating) >= 85 ? "rate-red" : colorRate;
