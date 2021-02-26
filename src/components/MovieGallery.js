@@ -38,6 +38,18 @@ const genreListing = {
   justifyContent: "center",
 };
 
+const visitedStyle = {
+  color: "#b8c1ea",
+  padding: "2px 5px",
+  border: "dashed 1px rgb(184, 193, 234)",
+  marginRight: "5px",
+  borderTop: "none",
+  borderRadius: "5px",
+  borderLeft: "none",
+  display: "inline-block",
+  cursor:"default"
+};
+
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
   const { movies, setMovies, movieRef, tagsRef, visitedRef } = useContext(
@@ -88,6 +100,26 @@ const Gallery = () => {
     setMovies(movies);
   };
 
+  const trimmer = (name) => {
+    if (name.length > 20) {
+      return `${name.substr(0, 19)}...`;
+    }
+    return name;
+  };
+
+  const toggleFullName = (e) => {
+    const fullName = e.target.getAttribute("data-name");
+    console.log(fullName,e.target.textContent);
+    if (fullName.length > 20) {
+      if (e.target.textContent == fullName) {
+        e.target.textContent = `${fullName.substr(0, 19)}...`;
+        return;
+      }
+    }
+    e.target.textContent = fullName;
+    return;
+  };
+
   useEffect(() => {
     console.log("useEffect, movie name changed");
     const mlist = nameSearch();
@@ -115,8 +147,12 @@ const Gallery = () => {
 
   const visitedPage = sessionStorage.getItem("page");
   if (visitedPage) {
+    const index = visitedRef.current.indexOf(visitedPage);
+    if (index >= 0) {
+      visitedRef.current.splice(index, 1);
+    }
     visitedRef.current.push(visitedPage);
-    sessionStorage.removeItem("page")
+    sessionStorage.removeItem("page");
   }
 
   return (
@@ -147,8 +183,13 @@ const Gallery = () => {
       </p>
       <p>
         {visitedRef.current.map((page, i) => (
-          <span>
-            {page} |&nbsp;
+          <span
+            onClick={toggleFullName}
+            data-name={`${page}`}
+            style={visitedStyle}
+            key={i}
+          >
+            {trimmer(page)}
           </span>
         ))}
       </p>
