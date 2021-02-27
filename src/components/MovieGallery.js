@@ -1,54 +1,8 @@
 import { MovieContext } from "../store/MovieContext";
 import { useContext, useState, useEffect } from "react";
 import Movie from "./Movie";
+import "../css/movie-gallery.css";
 
-const galleryStyle = {
-  minHeight: "80vh",
-  backgroundColor: "#2D7064",
-  fontSize: ".9em",
-  padding: "20px",
-};
-const tileStyle = {
-  backgroundColor: "#255E54",
-  padding: "10px",
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "space-between",
-};
-
-const searchStyle = {
-  padding: "10px",
-  borderRadius: "5px",
-  width: "20%",
-  minWidth: "160px",
-};
-const genreStyle = {
-  border: "1px solid grey",
-  padding: "3px 5px",
-  borderRadius: "7px",
-  marginRight: "5px",
-  marginBottom: "5px",
-  backgroundColor: "rgb(64, 143, 129)",
-  color: "#fff",
-  cursor: "pointer",
-};
-const genreListing = {
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
-};
-
-const visitedStyle = {
-  color: "#b8c1ea",
-  padding: "2px 5px",
-  border: "dashed 1px rgb(184, 193, 234)",
-  marginRight: "5px",
-  borderTop: "none",
-  borderRadius: "5px",
-  borderLeft: "none",
-  display: "inline-block",
-  cursor:"default"
-};
 
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
@@ -111,7 +65,7 @@ const Gallery = () => {
     const fullName = e.target.getAttribute("data-name");
     console.log(fullName,e.target.textContent);
     if (fullName.length > 20) {
-      if (e.target.textContent == fullName) {
+      if (e.target.textContent === fullName) {
         e.target.textContent = `${fullName.substr(0, 19)}...`;
         return;
       }
@@ -156,26 +110,26 @@ const Gallery = () => {
   }
 
   return (
-    <div style={galleryStyle}>
+    <div className="galleryStyle">
       <h1 style={{ color: "rgb(119, 216, 199)", textAlign: "center" }}>
         Movie Gallery ({movies.length})
       </h1>
       <p style={{ textAlign: "center" }}>
         <input
-          style={searchStyle}
+          className="searchStyle"
           type="text"
           value={moviename}
           onChange={movieSearch}
           placeholder="Type movie name..."
         />
       </p>
-      <p style={genreListing}>
+      <p className="genreListing">
         {allGenres &&
           allGenres.map((genre, i) => (
             <span
               key={i}
               onClick={(e) => selectGenre(genre, e.target)}
-              style={genreStyle}
+              className="genreStyle"
             >
               {genre}
             </span>
@@ -186,7 +140,7 @@ const Gallery = () => {
           <span
             onClick={toggleFullName}
             data-name={`${page}`}
-            style={visitedStyle}
+            className="visitedStyle"
             key={i}
           >
             {trimmer(page)}
@@ -195,7 +149,7 @@ const Gallery = () => {
       </p>
       <hr />
 
-      <div style={tileStyle}>
+      <div className="tileStyle">
         {movies.length ? (
           movies.map((mov, i) => (
             <Movie key={i} movInfo={mov} removeMovie={removeMovie} />
