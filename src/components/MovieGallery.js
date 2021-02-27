@@ -54,7 +54,7 @@ const Gallery = () => {
     setMovies(movies);
   };
 
-  const trimmer = (name) => {
+  const trimMovieName = (name) => {
     if (name.length > 20) {
       return `${name.substr(0, 19)}...`;
     }
@@ -80,13 +80,11 @@ const Gallery = () => {
     setMovies(getTaggedMovieList(mlist || []));
   }, [moviename]);
 
-  useEffect(() => {
-    console.log("gallery mounted", movieRef.current);
+  useEffect(() => {    
     tagsRef.current = [];
     if (!movieRef.current) {
       fetchData();
     } else {
-      console.log("from Cache:", movieRef.current);
       setMovies(movieRef.current);
     }
   }, []);
@@ -94,8 +92,8 @@ const Gallery = () => {
   console.log("rendering gallery, useRef:", movieRef.current);
   let allGenres = movieRef.current
     ? movieRef.current.map((m) => m.genre.split("|"))
-    : [];
-  allGenres = [].concat.apply([], allGenres);
+    : [];  
+  allGenres = allGenres.flat();
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
   allGenres.sort();
 
@@ -143,7 +141,7 @@ const Gallery = () => {
             className="visitedStyle"
             key={i}
           >
-            {trimmer(page)}
+            {trimMovieName(page)}
           </span>
         ))}
       </p>
