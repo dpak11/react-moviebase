@@ -76,12 +76,10 @@ const Gallery = () => {
   const sortby = (param) => {
     let mov = [...movieRef.current];
     if (param === "runtime") {
-      mov = mov.map((m) => {
-        return {
-          ...m,
-          runtime: Number(m.runtime.split(" ")[0])
-        }
-      });
+      mov = mov.map((m) => ({
+        ...m,
+        runtime: Number(m.runtime.split(" ")[0]),
+      }));
       mov.sort((a, b) => a.runtime - b.runtime);
     }
     if (param === "name") {
@@ -92,7 +90,7 @@ const Gallery = () => {
       });
     }
     if (param === "rating") {
-      mov.sort((a, b) => a.rating - b.rating);
+      mov.sort((a, b) => b.rating - a.rating);
     }
     setMovies(mov);
   };
@@ -132,7 +130,7 @@ const Gallery = () => {
 
   return (
     <div className="galleryStyle">
-      <h1 style={{ color: "rgb(119, 216, 199)", textAlign: "center" }}>
+      <h1>
         Movie Gallery ({movies.length})
       </h1>
       <p style={{ textAlign: "center" }}>
@@ -144,8 +142,11 @@ const Gallery = () => {
           placeholder="Type movie name..."
         />
       </p>
-      <p>
-        Sort By: <span onClick={() => sortby("rating")}>Rating</span> |{" "}
+      <p className="sortSection">
+        <label>
+          Sort By :
+        </label>{" "}
+        <span onClick={() => sortby("rating")}>Rating</span> |{" "}
         <span onClick={() => sortby("name")}>Name</span> |{" "}
         <span onClick={() => sortby("runtime")}>Duration</span>
       </p>
@@ -173,7 +174,7 @@ const Gallery = () => {
           </span>
         ))}
       </p>
-      <hr />
+      <hr style={{ borderColor: "grey" }} />
 
       <div className="tileStyle">
         {movies.length ? (

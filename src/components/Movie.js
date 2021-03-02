@@ -21,9 +21,13 @@ const Movie = ({ movInfo, removeMovie }) => {
     const id = e.target.getAttribute("data-id");
     removeMovie(Number(id));
   };
-  
+
   console.log("rendering Movie Item");
   const genres = movInfo.genre.split("|");
+  const runtime =
+    typeof movInfo.runtime === "number"
+      ? `${movInfo.runtime} mins`
+      : movInfo.runtime;
 
   return (
     <div style={styles}>
@@ -36,16 +40,22 @@ const Movie = ({ movInfo, removeMovie }) => {
         </Link>
       </h3>
       <p style={genreStyle}>
-        {genres.map((genre,i) => (
-          <span key={i} className="tags">{genre}</span>
+        {genres.map((genre, i) => (
+          <span key={i} className="tags">
+            {genre}
+          </span>
         ))}
       </p>
 
-      <p>{movInfo.runtime}</p>
+      <p>{runtime}</p>
       <p>{movInfo.country}</p>
       <p>{Number(movInfo.rating)}%</p>
       <p>
-        <button className="deleteBtn" data-id={movInfo.id} onClick={deleteMovie}>
+        <button
+          className="deleteBtn"
+          data-id={movInfo.id}
+          onClick={deleteMovie}
+        >
           Delete
         </button>
       </p>

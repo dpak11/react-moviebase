@@ -4,6 +4,10 @@
   font-size: 0.9em;
   padding: 20px;
 }
+.galleryStyle h1 {
+  color: rgb(119, 216, 199);
+  text-align: center;
+}
 .tileStyle {
   background-color: #255e54;
   padding: 10px;
@@ -44,4 +48,19 @@
   border-left: none;
   display: inline-block;
   cursor: default;
+}
+
+.sortSection {
+  text-align: center;
+  color: #aeaef0;
+}
+
+.sortSection label {
+  color: #e8c17a;
+  padding-right: 20px;
+  font-weight: bold;
+}
+.sortSection span {
+  cursor: pointer;
+  text-decoration: underline;
 }
