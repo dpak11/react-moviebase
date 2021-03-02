@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import Movie from "./Movie";
 import "../css/movie-gallery.css";
 
-
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
   const { movies, setMovies, movieRef, tagsRef, visitedRef } = useContext(
@@ -63,7 +62,7 @@ const Gallery = () => {
 
   const toggleFullName = (e) => {
     const fullName = e.target.getAttribute("data-name");
-    console.log(fullName,e.target.textContent);
+    console.log(fullName, e.target.textContent);
     if (fullName.length > 20) {
       if (e.target.textContent === fullName) {
         e.target.textContent = `${fullName.substr(0, 19)}...`;
@@ -74,13 +73,37 @@ const Gallery = () => {
     return;
   };
 
+  const sortby = (param) => {
+    let mov = [...movieRef.current];
+    if (param === "runtime") {
+      mov = mov.map((m) => {
+        return {
+          ...m,
+          runtime: Number(m.runtime.split(" ")[0])
+        }
+      });
+      mov.sort((a, b) => a.runtime - b.runtime);
+    }
+    if (param === "name") {
+      mov.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
+    }
+    if (param === "rating") {
+      mov.sort((a, b) => a.rating - b.rating);
+    }
+    setMovies(mov);
+  };
+
   useEffect(() => {
     console.log("useEffect, movie name changed");
     const mlist = nameSearch();
     setMovies(getTaggedMovieList(mlist || []));
   }, [moviename]);
 
-  useEffect(() => {    
+  useEffect(() => {
     tagsRef.current = [];
     if (!movieRef.current) {
       fetchData();
@@ -92,7 +115,7 @@ const Gallery = () => {
   console.log("rendering gallery, useRef:", movieRef.current);
   let allGenres = movieRef.current
     ? movieRef.current.map((m) => m.genre.split("|"))
-    : [];  
+    : [];
   allGenres = allGenres.flat();
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
   allGenres.sort();
@@ -120,6 +143,11 @@ const Gallery = () => {
           onChange={movieSearch}
           placeholder="Type movie name..."
         />
+      </p>
+      <p>
+        Sort By: <span onClick={() => sortby("rating")}>Rating</span> |{" "}
+        <span onClick={() => sortby("name")}>Name</span> |{" "}
+        <span onClick={() => sortby("runtime")}>Duration</span>
       </p>
       <p className="genreListing">
         {allGenres &&
