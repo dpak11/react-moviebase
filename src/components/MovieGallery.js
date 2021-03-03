@@ -5,6 +5,11 @@ import "../css/movie-gallery.css";
 
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
+  const [sortType, setSortType] = useState({
+    name: false,
+    rating: false,
+    runtime: false,
+  });
   const { movies, setMovies, movieRef, tagsRef, visitedRef } = useContext(
     MovieContext
   );
@@ -22,8 +27,7 @@ const Gallery = () => {
 
   const removeMovie = (id) => {
     movieRef.current = movieRef.current.filter((m) => m.id !== id);
-    const mlist = nameSearch();
-    setMovies(getTaggedMovieList(mlist || []));
+    setMovies(setFilters());
   };
 
   const selectGenre = (genre, target) => {
@@ -34,13 +38,19 @@ const Gallery = () => {
       tagsRef.current.push(genre);
     }
     target.classList.toggle("tag-selected");
-    setMovies(getTaggedMovieList(movieRef.current));
+    setMovies(setFilters());
   };
 
   const getTaggedMovieList = (movList) => {
     return movList.filter((m) =>
       tagsRef.current.every((tag) => m.genre.indexOf(tag) >= 0)
     );
+  };
+
+  const setFilters = () => {
+    const searchedNames = nameSearch();
+    const tagsFilter = getTaggedMovieList(searchedNames || []);
+    return tagsFilter;
   };
 
   const fetchData = async () => {
@@ -74,7 +84,15 @@ const Gallery = () => {
   };
 
   const sortby = (param) => {
-    let mov = [...movieRef.current];
+    let mov = setFilters();
+    setSortType(() => {
+      return {
+        name: false,
+        rating: false,
+        runtime: false,
+        [param]: true,
+      };
+    });
     if (param === "runtime") {
       mov = mov.map((m) => ({
         ...m,
@@ -97,8 +115,7 @@ const Gallery = () => {
 
   useEffect(() => {
     console.log("useEffect, movie name changed");
-    const mlist = nameSearch();
-    setMovies(getTaggedMovieList(mlist || []));
+    setMovies(setFilters());
   }, [moviename]);
 
   useEffect(() => {
@@ -130,9 +147,7 @@ const Gallery = () => {
 
   return (
     <div className="galleryStyle">
-      <h1>
-        Movie Gallery ({movies.length})
-      </h1>
+      <h1>Movie Gallery ({movies.length})</h1>
       <p style={{ textAlign: "center" }}>
         <input
           className="searchStyle"
@@ -143,12 +158,27 @@ const Gallery = () => {
         />
       </p>
       <p className="sortSection">
-        <label>
-          Sort By :
-        </label>{" "}
-        <span onClick={() => sortby("rating")}>Rating</span> |{" "}
-        <span onClick={() => sortby("name")}>Name</span> |{" "}
-        <span onClick={() => sortby("runtime")}>Duration</span>
+        <label>Sort By :</label>
+        <span
+          className={sortType.rating ? "active" : ""}
+          onClick={() => sortby("rating")}
+        >
+          Rating
+        </span>
+        &nbsp; | &nbsp;
+        <span
+          className={sortType.name ? "active" : ""}
+          onClick={() => sortby("name")}
+        >
+          Name
+        </span>
+        &nbsp; | &nbsp;
+        <span
+          className={sortType.runtime ? "active" : ""}
+          onClick={() => sortby("runtime")}
+        >
+          Duration
+        </span>
       </p>
       <p className="genreListing">
         {allGenres &&

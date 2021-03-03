@@ -1,58 +1,73 @@
 .Header {
-    width: 100%;
-    height: 10vh;
-    background-color: #dcdcdc;
-  }
-  .container div {
-    box-sizing: border-box;
-  }
-  
-  .Header ul {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  .Header li {
-    list-style: none;
-  }
-  
-  footer {
-    padding: 20px;
-    background-color: orange;
-    text-align: center;
-    margin-top: 20px;
-  }
-  .tags {
-    border: 1px solid grey;
-    padding: 3px 5px;
-    border-radius: 7px;
-    margin-bottom: 10px;
-  }
-  span.tag-selected {
-    background-color: yellow !important;
-    color: #000 !important;
-  }
-  .deleteBtn {
-    padding: 6px 12px;
-    border-radius: 7px;
-    background: #dd1f1f;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.8em;
-  }
-  
-  .rate-pale{
-    color:rgb(179, 170, 170)
-  }
-  .rate-grey{
-    color: rgb(100, 95, 95);
-  }
-  .rate-red{
-    color: red;
-  }
-  
-  
+  width: 100%;
+  height: 10vh;
+  background-color: #dcdcdc;
+}
+.container div {
+  box-sizing: border-box;
+}
+
+.Header ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.Header li {
+  list-style: none;
+}
+.nav-bar {
+  height: 10vh;
+  background-color: #2e786a;
+  font-size: 1.5em;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: solid 3px #1f675a;
+}
+.nav-bar a{
+  color: #d18795;
+}
+
+.nav-bar a:hover{
+  color: #a3a2ec;
+}
+
+footer {
+  padding: 20px;
+  background-color: orange;
+  text-align: center;
+  margin-top: 20px;
+}
+.tags {
+  border: 1px solid grey;
+  padding: 3px 5px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+span.tag-selected {
+  background-color: yellow !important;
+  color: #000 !important;
+}
+.deleteBtn {
+  padding: 6px 12px;
+  border-radius: 7px;
+  background: #dd1f1f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8em;
+}
+
+.rate-pale {
+  color: rgb(179, 170, 170);
+}
+.rate-grey {
+  color: rgb(100, 95, 95);
+}
+.rate-red {
+  color: red;
+}

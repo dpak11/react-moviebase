@@ -56,11 +56,15 @@
 }
 
 .sortSection label {
-  color: #e8c17a;
-  padding-right: 20px;
+  color: #bba276;
+  padding-right: 10px;
   font-weight: bold;
 }
 .sortSection span {
   cursor: pointer;
   text-decoration: underline;
+}
+.sortSection span.active{
+  font-weight: bold;
+  color: #d0f11d;
 }
