@@ -1,14 +1,5 @@
 import { Link } from "react-router-dom";
 
-const styles = {
-  width: "250px",
-  border: "1px solid #605c5c",
-  padding: "10px 15px",
-  borderRadius: "10px",
-  background: "rgb(60, 166, 147)",
-  marginBottom: "10px",
-};
-
 const genreStyle = {
   display: "flex",
   justifyContent: "space-between",
@@ -16,7 +7,7 @@ const genreStyle = {
   flexWrap: "wrap",
 };
 
-const Movie = ({ movInfo, removeMovie }) => {
+const Movie = ({ movInfo, removeMovie, isvisited }) => {
   const deleteMovie = (e) => {
     const id = e.target.getAttribute("data-id");
     removeMovie(Number(id));
@@ -30,7 +21,7 @@ const Movie = ({ movInfo, removeMovie }) => {
       : movInfo.runtime;
 
   return (
-    <div style={styles}>
+    <div className={isvisited ? "movieBlock isChecked" : "movieBlock"}>
       <p style={{ textAlign: "center" }}>
         <img src={`${movInfo.photos}`} alt="" />
       </p>

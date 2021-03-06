@@ -26,11 +26,11 @@
   justify-content: space-around;
   border-bottom: solid 3px #1f675a;
 }
-.nav-bar a{
+.nav-bar a {
   color: #d18795;
 }
 
-.nav-bar a:hover{
+.nav-bar a:hover {
   color: #a3a2ec;
 }
 
@@ -60,6 +60,19 @@ span.tag-selected {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.8em;
+}
+
+.movieBlock {
+  width: 250px;
+  border: 1px solid #605c5c;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background: rgb(60, 166, 147);
+  margin-bottom: 10px;
+}
+.movieBlock.isChecked {
+  background-color: rgb(131 133 160);
+  filter: blur(1px);
 }
 
 .rate-pale {

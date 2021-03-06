@@ -127,7 +127,7 @@ const Gallery = () => {
     }
   }, []);
 
-  console.log("rendering gallery, useRef:", movieRef.current);
+ 
   let allGenres = movieRef.current
     ? movieRef.current.map((m) => m.genre.split("|"))
     : [];
@@ -135,7 +135,7 @@ const Gallery = () => {
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
   allGenres.sort();
 
-  const visitedPage = sessionStorage.getItem("page");
+  const visitedPage = sessionStorage.getItem("page") || "";
   if (visitedPage) {
     const index = visitedRef.current.indexOf(visitedPage);
     if (index >= 0) {
@@ -144,6 +144,7 @@ const Gallery = () => {
     visitedRef.current.push(visitedPage);
     sessionStorage.removeItem("page");
   }
+  
 
   return (
     <div className="galleryStyle">
@@ -152,7 +153,7 @@ const Gallery = () => {
         <input
           className="searchStyle"
           type="text"
-          value={moviename}
+          value={moviename} 
           onChange={movieSearch}
           placeholder="Type movie name..."
         />
@@ -209,7 +210,12 @@ const Gallery = () => {
       <div className="tileStyle">
         {movies.length ? (
           movies.map((mov, i) => (
-            <Movie key={i} movInfo={mov} removeMovie={removeMovie} />
+            <Movie
+              key={i}
+              movInfo={mov}
+              removeMovie={removeMovie}
+              isvisited={visitedRef.current.includes(mov.name)}
+            />
           ))
         ) : (
           <span style={{ display: !movieRef.current ? "block" : "none" }}>
