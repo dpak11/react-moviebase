@@ -4,8 +4,8 @@ const styles = {
   width: "250px",
   border: "1px solid #605c5c",
   padding: "10px 15px",
-  borderRadius: "5px 5px 20px 20px",
-  background: "rgb(185 188 183)",
+  borderRadius: "10px",
+  background: "rgb(60, 166, 147)",
   marginBottom: "10px",
 };
 
