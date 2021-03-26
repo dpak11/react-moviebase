@@ -14,7 +14,7 @@ const Home = () => {
       <h1>Welcome to React Movie Base (Homepage)</h1>
       <p>
         <li>
-          The Gallery Link will Load random list of movies from external API{" "}
+          The Gallery Link will load random list of movies from external API{" "}
           <span
             style={{
               background: "red",
@@ -26,9 +26,8 @@ const Home = () => {
             https://api.mockaroo.com/api/671ec130?key=30660820
           </span>
         </li>
-        <li>Then Cache the movies after its loaded for the first time.</li>
         <li>
-          You can filter through the Movies by Category or by Genre or by typing
+          Filter through the loaded Movies by Category or by Genre or by searching
           the movie name. Or all combined.
         </li>
       </p>

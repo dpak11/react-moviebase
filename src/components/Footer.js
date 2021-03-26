@@ -1,14 +1,7 @@
 
-
-const Footer = () => {
-    const style = {
-        height:"10vh",
-        backgroundColor:"gray",
-        padding:"20px",
-        textAlign:"center"
-    }
+const Footer = () => {   
   return (
-    <div style={style}>
+    <div className="footer">
       This is just a footer
     </div>
   );

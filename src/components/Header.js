@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   console.log("rendering header");
   return (
-    <div className="Header">
+    <div className="header">
        <ul>
           <li>About</li>
           <li>Contact</li>

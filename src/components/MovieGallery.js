@@ -128,9 +128,7 @@ const Gallery = () => {
   }, []);
 
  
-  let allGenres = movieRef.current
-    ? movieRef.current.map((m) => m.genre.split("|"))
-    : [];
+  let allGenres = movieRef.current ? movieRef.current.map((m) => m.genre.split("|")) : [];
   allGenres = allGenres.flat();
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
   allGenres.sort();
