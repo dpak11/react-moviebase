@@ -15,10 +15,7 @@ const Movie = ({ movInfo, removeMovie, isvisited }) => {
 
   console.log("rendering Movie Item");
   const genres = movInfo.genre.split("|");
-  const runtime =
-    typeof movInfo.runtime === "number"
-      ? `${movInfo.runtime} mins`
-      : movInfo.runtime;
+  const runtime = typeof movInfo.runtime === "number" ? `${movInfo.runtime} mins` : movInfo.runtime;
 
   return (
     <div className={isvisited ? "movieBlock isChecked" : "movieBlock"}>
