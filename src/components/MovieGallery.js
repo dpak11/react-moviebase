@@ -142,7 +142,8 @@ const Gallery = () => {
     visitedRef.current.push(visitedPage);
     sessionStorage.removeItem("page");
   }
-  
+
+  const noMovieText = (movieRef.current && !movies.length) ? "No Movies Found" : !movieRef.current ? "Loading..." : "";  
 
   return (
     <div className="galleryStyle">
@@ -216,9 +217,9 @@ const Gallery = () => {
             />
           ))
         ) : (
-          <span style={{ display: !movieRef.current ? "block" : "none" }}>
-            Loading...
-          </span>
+          <p>
+            <span>{noMovieText}</span>
+          </p>
         )}
       </div>
     </div>
