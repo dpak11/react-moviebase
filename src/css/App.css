@@ -93,6 +93,12 @@ span.tag-selected {
   transform: scale(.9);
   background-color: #d8c6c6;
 }
+.genre-block{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #43476f;
+  flex-wrap: wrap;
+}
 
 .rate-pale {
   color: rgb(179, 170, 170);

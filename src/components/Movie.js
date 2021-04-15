@@ -1,12 +1,5 @@
 import { Link } from "react-router-dom";
 
-const genreStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  borderBottom: "solid 1px #43476f",
-  flexWrap: "wrap",
-};
-
 const Movie = ({ movInfo, removeMovie, isvisited }) => {
   const deleteMovie = (e) => {
     const id = e.target.getAttribute("data-id");
@@ -27,7 +20,7 @@ const Movie = ({ movInfo, removeMovie, isvisited }) => {
           {movInfo.name}
         </Link>
       </h3>
-      <p style={genreStyle}>
+      <p className="genre-block">
         {genres.map((genre, i) => (
           <span key={i} className="tags">
             {genre}
