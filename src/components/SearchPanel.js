@@ -1,3 +1,5 @@
+import '../css/search-panel.css';
+
 export const SearchPanel = ({moviename,movieSearch,sortType, sortby, allGenres, selectGenre}) => {
   return (
     <>

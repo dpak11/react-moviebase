@@ -54,50 +54,10 @@ code {
   padding:20px;
   text-align:center
 }
-.tags {
-  border: 1px solid #615b5b;
-  padding: 3px 5px;
-  border-radius: 7px;
-  margin-bottom: 10px;
-}
+
 span.tag-selected {
   background-color: yellow !important;
   color: #000 !important;
-}
-.deleteBtn {
-  padding: 6px 12px;
-  border-radius: 7px;
-  background: #dd1f1f;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.8em;
-}
-
-.movieBlock {
-  width: 250px;
-  border: 1px solid #605c5c;
-  padding: 10px 15px;
-  border-radius: 10px;
-  background: rgb(60, 166, 147);
-  margin-bottom: 10px;  
-  transition: all .3s ease-in-out;
-}
-.movieBlock.isChecked {
-  background-color: rgb(131 133 160);
-  opacity: .4;
-}
-.movieBlock:hover{
-  transform: scale(.9);
-  background-color: #d8c6c6;
-}
-.genre-block{
-  display: flex;
-  justify-content: space-between;
-  border-bottom: solid 1px #43476f;
-  flex-wrap: wrap;
 }
 
 .rate-pale {

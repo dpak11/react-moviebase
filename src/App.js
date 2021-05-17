@@ -13,13 +13,12 @@ import {
 
 import "./css/App.css";
 
-function App4() {
-  
+function App() {
   return (
     <Router>
       <div className="container">
-      <Nav />
-        <MovieProvider>         
+        <Nav />
+        <MovieProvider>
           <div>
             <Switch>
               <Route path="/" exact component={Home} />
@@ -35,4 +34,4 @@ function App4() {
   );
 }
 
-export default App4;
+export default App;
