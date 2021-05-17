@@ -1,4 +1,4 @@
-import { Redirect } from "react-router";
+
 
 const Home = () => {
   const homestyle = {

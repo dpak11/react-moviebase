@@ -1,7 +1,9 @@
 import { MovieContext } from "../store/MovieContext";
 import { useContext, useState, useEffect } from "react";
+import { SearchPanel } from "./SearchPanel";
 import Movie from "./Movie";
 import "../css/movie-gallery.css";
+
 
 const Gallery = () => {
   const [moviename, setMoviename] = useState("");
@@ -10,9 +12,8 @@ const Gallery = () => {
     rating: false,
     runtime: false,
   });
-  const { movies, setMovies, movieRef, tagsRef, visitedRef } = useContext(
-    MovieContext
-  );
+  const { movies, setMovies, movieRef, tagsRef, visitedRef } =
+    useContext(MovieContext);
 
   const movieSearch = (e) => {
     setMoviename(e.target.value);
@@ -127,8 +128,9 @@ const Gallery = () => {
     }
   }, []);
 
- 
-  let allGenres = movieRef.current ? movieRef.current.map((m) => m.genre.split("|")) : [];
+  let allGenres = movieRef.current
+    ? movieRef.current.map((m) => m.genre.split("|"))
+    : [];
   allGenres = allGenres.flat();
   allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
   allGenres.sort();
@@ -143,55 +145,24 @@ const Gallery = () => {
     sessionStorage.removeItem("page");
   }
 
-  const noMovieText = (movieRef.current && !movies.length) ? "No Movies Found" : !movieRef.current ? "Loading..." : "";  
+  const noMovieText =
+    movieRef.current && !movies.length
+      ? "No Movies Found"
+      : !movieRef.current
+      ? "Loading..."
+      : "";
 
   return (
     <div className="galleryStyle">
       <h1>Movie Gallery ({movies.length})</h1>
-      <p style={{ textAlign: "center" }}>
-        <input
-          className="searchStyle"
-          type="text"
-          value={moviename} 
-          onChange={movieSearch}
-          placeholder="Type movie name..."
-        />
-      </p>
-      <p className="sortSection">
-        <label>Sort By :</label>
-        <span
-          className={sortType.rating ? "active" : ""}
-          onClick={() => sortby("rating")}
-        >
-          Rating
-        </span>
-        &nbsp; | &nbsp;
-        <span
-          className={sortType.name ? "active" : ""}
-          onClick={() => sortby("name")}
-        >
-          Name
-        </span>
-        &nbsp; | &nbsp;
-        <span
-          className={sortType.runtime ? "active" : ""}
-          onClick={() => sortby("runtime")}
-        >
-          Duration
-        </span>
-      </p>
-      <p className="genreListing">
-        {allGenres &&
-          allGenres.map((genre, i) => (
-            <span
-              key={i}
-              onClick={(e) => selectGenre(genre, e.target)}
-              className="genreStyle"
-            >
-              {genre}
-            </span>
-          ))}
-      </p>
+      <SearchPanel
+        moviename={moviename}
+        movieSearch={movieSearch}
+        sortType={sortType}
+        sortby={sortby}
+        allGenres={allGenres}
+        selectGenre={selectGenre}
+      />
       <p>
         {visitedRef.current.map((page, i) => (
           <span
