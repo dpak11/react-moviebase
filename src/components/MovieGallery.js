@@ -1,8 +1,10 @@
 import { MovieContext } from "../store/MovieContext";
 import { useContext, useState, useEffect } from "react";
 import { SearchPanel } from "./SearchPanel";
+import { VisitedList } from "./VisitedList";
 import Movie from "./Movie";
 import "../css/movie-gallery.css";
+
 
 
 const Gallery = () => {
@@ -64,26 +66,7 @@ const Gallery = () => {
     setMovies(movies);
   };
 
-  const trimMovieName = (name) => {
-    if (name.length > 20) {
-      return `${name.substr(0, 19)}...`;
-    }
-    return name;
-  };
-
-  const toggleFullName = (e) => {
-    const fullName = e.target.getAttribute("data-name");
-    console.log(fullName, e.target.textContent);
-    if (fullName.length > 20) {
-      if (e.target.textContent === fullName) {
-        e.target.textContent = `${fullName.substr(0, 19)}...`;
-        return;
-      }
-    }
-    e.target.textContent = fullName;
-    return;
-  };
-
+ 
   const sortby = (param) => {
     let mov = setFilters();
     setSortType(() => {
@@ -128,13 +111,6 @@ const Gallery = () => {
     }
   }, []);
 
-  let allGenres = movieRef.current
-    ? movieRef.current.map((m) => m.genre.split("|"))
-    : [];
-  allGenres = allGenres.flat();
-  allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
-  allGenres.sort();
-
   const visitedPage = sessionStorage.getItem("page") || "";
   if (visitedPage) {
     const index = visitedRef.current.indexOf(visitedPage);
@@ -144,37 +120,23 @@ const Gallery = () => {
     visitedRef.current.push(visitedPage);
     sessionStorage.removeItem("page");
   }
-
-  const noMovieText =
-    movieRef.current && !movies.length
-      ? "No Movies Found"
-      : !movieRef.current
-      ? "Loading..."
-      : "";
+  const noMovieText = movieRef.current && !movies.length ? "No Movies Found" : !movieRef.current ? "Loading..." : "";
 
   return (
     <div className="galleryStyle">
       <h1>Movie Gallery ({movies.length})</h1>
+
       <SearchPanel
         moviename={moviename}
         movieSearch={movieSearch}
+        movieRef={movieRef.current}
         sortType={sortType}
         sortby={sortby}
-        allGenres={allGenres}
         selectGenre={selectGenre}
       />
-      <p>
-        {visitedRef.current.map((page, i) => (
-          <span
-            onClick={toggleFullName}
-            data-name={`${page}`}
-            className="visitedStyle"
-            key={i}
-          >
-            {trimMovieName(page)}
-          </span>
-        ))}
-      </p>
+
+      <VisitedList visited={visitedRef.current} />
+
       <hr style={{ borderColor: "grey" }} />
 
       <div className="tileStyle">

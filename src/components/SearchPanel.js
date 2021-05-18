@@ -1,6 +1,13 @@
 import '../css/search-panel.css';
 
-export const SearchPanel = ({moviename,movieSearch,sortType, sortby, allGenres, selectGenre}) => {
+export const SearchPanel = ({moviename,movieSearch,sortType, sortby, selectGenre, movieRef}) => { 
+
+  let allGenres = movieRef
+    ? movieRef.map((m) => m.genre.split("|"))
+    : [];
+  allGenres = allGenres.flat();
+  allGenres = [...new Set(allGenres)].filter((g) => !g.includes("no genre"));
+  allGenres.sort();
   return (
     <>
       <p style={{ textAlign: "center" }}>
