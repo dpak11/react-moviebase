@@ -16,6 +16,11 @@
   justify-content: space-between;
 }
 
+span.tag-selected {
+  background-color: yellow !important;
+  color: #000 !important;
+}
+
 
 .visitedStyle {
   color: #b8c1ea;

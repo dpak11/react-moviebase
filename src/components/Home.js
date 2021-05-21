@@ -8,6 +8,12 @@ const Home = () => {
     padding: "20px 40px",
     color: "#d8cfcf",
   };
+  const apilink = {
+    background: "red",
+    padding: "3px",
+    color: "#e28b8b",
+    backgroundColor: "rgba(139, 124, 124, 0.5)"
+  }
 
   return (
     <div style={homestyle}>
@@ -15,14 +21,7 @@ const Home = () => {
       <p>
         <li>
           The Gallery Link will load random list of movies from external API{" "}
-          <span
-            style={{
-              background: "red",
-              padding: "3px",
-              color: "#e28b8b",
-              backgroundColor: "rgba(139, 124, 124, 0.5)"
-            }}
-          >
+          <span style={apilink}>
             https://api.mockaroo.com/api/671ec130?key=30660820
           </span>
         </li>
